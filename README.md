@@ -1,1 +1,0 @@
-# sebastian-blandon.github.io
