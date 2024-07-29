@@ -1,0 +1,472 @@
+---
+title: "Producción I"
+author:
+  - name: "Ing. Sebastián Blandón Londoño"
+    orcid: 0000-0002-0513-3860
+    url: https://www.linkedin.com/in/sebastian-blandon/
+    email: "s.blandon@utp.edu.co"
+    affiliation: "Universidad Tecnológica de Pereira"
+format:
+  revealjs:
+    scrollable: true
+    margin: 0.13
+    self-contained: true
+    chalkboard: false
+    theme: [simple, diapositiva.scss]
+    wrap: auto
+    progress: true
+    toc: false
+    toc-depth: 5
+    logo: logo_utp.png
+    footer: "Ingeniería Industrial | Facultad de Ciencias Empresariales"
+    menu:
+      numbers: false
+    slide-level: 4
+    show-slide-number: speaker
+    touch: true
+    incremental: true
+    preview-links: auto
+    link-external-newwindow: true
+    hide-inactive-cursor: true
+    hide-cursor-time: 1500
+    slide-tone: false
+    pointer:
+      color: 'red'
+      key: 'q'
+      pointerSize: 32
+      alwaysVisible: false
+    confetti:
+      particleCount: 150
+      angle: 90
+      spread: 360
+      startVelocity: 25
+      gravity: 0.65
+      drift: 0
+      ticks: 400
+      colors: ["#0366fc", "#f54281", "#1fd14f"]
+      scalar: 0.7
+    spotlight:
+      toggleSpotlightOnMouseDown: false
+      spotlightOnKeyPressAndHold: 18
+      useAsPointer: false
+revealjs-plugins:
+  - pointer
+  - confetti
+editor: 
+  markdown: 
+    wrap: 72
+---
+
+```{r include=FALSE}
+# Carga de paquetes
+library(tidyverse)
+library(knitr)
+library(kableExtra)
+```
+
+# Introducción
+
+### ¿Para qué sirve este curso?
+
+-   Diseñar, programar y controlar la producción de bienes.
+-   Determinar y analizar variables de operación que aporten a la
+    formulación de planes de mejoramiento para el uso de los recursos
+    empresariales.
+-   Proponer sistemas de información y reporte que faciliten y mejoren
+    el análisis de la operación.
+
+## Contenido
+
+![](0_Figures/0_AsignaturasProduccion.png)
+
+## Evaluación
+
+::: columns
+::: {.column width="25%"}
+**Módulo I (30%)**
+
+\- Parcial (25%)
+
+\- Actividades en clase (5%)
+:::
+
+::: {.column width="25%"}
+**Módulo II (20%)**
+
+\- Parcial (15%)
+
+\- Actividades en clase (5%)
+:::
+
+::: {.column width="25%"}
+**Módulo III (20%)**
+
+\- Parcial (15%)
+
+\- Actividades en clase (5%)
+:::
+
+::: {.column .small-text width="25%"}
+**Actividades Complementarias e integradoras (30%)**
+
+\- Lectura (5%)
+
+\- Dashboard OEE (15%)
+
+\- Taller de optimización en AMPL (10%)
+:::
+:::
+
+## Recursos guía
+
+::: nonincremental
+-   Chapman (2006). Planificación y Control de la Producción.
+-   Curry y Feldman (2011). Manufacturing Systems Modelling and Analysis
+    (2nd ed.).
+-   Muñoz y Zapata (2023). Introducción a la manufactura de clase
+    mundial.
+-   Nahmias (2015). Production and Operations Analysis (7th ed.).
+-   Pinedo (2012). Scheduling: Theory, Algorithms and Systems (4th ed.).
+:::
+
+## Software
+
+::: columns
+::: {.column width="25%"}
+![](0_Figures/0_Logo_Excel.jpeg)
+:::
+
+::: {.column width="25%"}
+![](0_Figures/0_Logo_AMPL.png)
+:::
+
+::: {.column width="25%"}
+![](0_Figures/0_Logo_Qlik.png) **Qlik Sense**
+:::
+
+::: {.column width="25%"}
+![](0_Figures/0_Logo_R.png)
+:::
+:::
+
+## Presentación
+
+::: notes
+Mencionar los acuerdos de clase: - No responder a no ser que le sea
+consultado directa o abiertamente.
+:::
+
+## Repaso de Investigación de Operaciones
+
+### ¿Qué es la investigación de operaciones?
+
+La investigación de operaciones es la rama de las matemáticas que aporta
+herramientas para la toma de decisiones, específicamente problemas de
+asignación de recursos escasos. Esto a su vez, buscando la eficiencia y
+eficacia en el uso de dichos recursos.
+
+### Metodología para abordar problemas
+
+![](0_Figures/0_MetodologiaModelamiento.png)
+
+### Un ejemplo básico...
+
+::: r-fit-text
+Un expendio naturista prepara sus alimentos y los vende al público
+basándose en tres materias primas, cuyos contenidos se presentan
+enseguida:
+
+```{r}
+titulos <- c("Materia prima", "Costo $/kg", "Azúcares %", "Grasas %", "Proteínas %", "Inertes %")
+X1 <- c("A","B","C")
+X2 <- c(2.35,2,1.7)
+X3 <- c(12,10,8)
+X4 <- c(10,10,6)
+X5 <- c(60,50,44)
+X6 <- c(18,30,42)
+
+df <- as_tibble(cbind(X1,X2,X3,X4,X5,X6))
+colnames(df) <- titulos
+df %>% 
+  kbl(align = "c") %>% 
+  kable_material(c("striped", "hover")) %>% 
+  row_spec(1:nrow(df), extra_css = "text-align: center; vertical-align: middle;")
+```
+
+¿Cuánto deberían mezclar de cada una de las tres si se desea minimizar
+el costo para preparar 1kg de alimento, cuyo contenido de azúcar no sea
+menor a 10%, su contenido de grasa no mayor a 9.5% y su contenido de
+proteínas no menor de 52%?
+:::
+
+#### Notación expandida
+
+::: r-fit-text
+$\begin{align*}
+\text{min } Z(X) &= 2.35X_{A} + 2X_{B} + 1.7X_{C} \\
+\\
+\text{s.a:} \\
+0.12X_{A} + 0.10X_{B} + 0.08X_{C} &\geq 0.1 ~\text{(Contenido de azúcar)} \\
+0.1X_{A} + 0.1X_{B} + 0.06X_{C} &\leq 0.095  ~\text{(Contenido de grasa)} \\
+0.6X_{A} + 0.5X_{B} + 0.44X_{C} &\geq 0.52  ~\text{(Contenido de proteínas)} \\
+X_{A} + X_{B} + X_{C} &= 1 ~\text{(Cantidad requerida)} \\
+X_{A}, X_{B}, X_{C} &\geq 0 ~\text{(No negatividad)} \\
+\\
+\text{Donde:} \\
+X_{A} &= \text{Cantidad a usar de la materia prima A} \\
+X_{B} &= \text{Cantidad a usar de la materia prima B} \\
+X_{C} &= \text{Cantidad a usar de la materia prima C}
+\end{align*}$
+:::
+
+#### Notación compacta
+
+::: r-fit-text
+$\begin{align*}
+\text{min } Z(X) &= \sum_{i=1}^{N} Costo_{i} \times X_{i} \\
+\\
+\text{s.a:} \\
+\sum_{i=1}^{N} Azucar_{i} \times X_{i}  &\geq minimo_{Azucar} ~\text{(Contenido de azúcar)} \\
+\sum_{i=1}^{N} Grasa_{i} \times X_{i}  &\leq maximo_{Grasa}  ~\text{(Contenido de grasa)} \\
+\sum_{i=1}^{N} Proteinas_{i} \times X_{i}  &\geq minimo_{Proteinas}  ~\text{(Contenido de proteínas)} \\
+\sum_{i=1}^{N} X_{i}  &= 1 ~\text{(Cantidad requerida)} \\
+X_{i} &\geq 0 ~\text{(No negatividad)} \\
+\\
+\text{Donde:} \\
+X_{i} &= \text{Cantidad a usar de la materia prima i}
+\end{align*}$
+:::
+
+### Software de optimización
+
+::: r-fit-text
+Big Text
+:::
+
+## Elementos de AMPL
+
+### Archivo mod
+
+::: r-fit-text
+Big Text
+:::
+
+### Archivo dat
+
+::: r-fit-text
+Big Text
+:::
+
+# Módulo I
+
+## Generalidades
+
+### Origen elemental
+
+::: r-fit-text
+Big Text
+:::
+
+### Historia
+
+::: r-fit-text
+Big Text
+:::
+
+#### Revoluciones industriales
+
+::: r-fit-text
+Big Text
+:::
+
+#### Personajes importantes
+
+::: r-fit-text
+Big Text
+:::
+
+### Ciclo de vida del producto
+
+::: r-fit-text
+Big Text
+:::
+
+### Sostenibilidad y sustentabilidad
+
+::: r-fit-text
+Big Text
+:::
+
+## Ingeniería de sistemas de producción
+
+### Categorización
+
+::: r-fit-text
+Big Text
+:::
+
+### Sistemas de producción
+
+::: r-fit-text
+Big Text
+:::
+
+### Distribución en planta
+
+::: r-fit-text
+Big Text
+:::
+
+### Procesos industriales
+
+#### Procesos continuos
+
+#### Procesos discretos
+
+::: r-fit-text
+Big Text
+:::
+
+### Diseño del proceso
+
+::: r-fit-text
+Big Text
+:::
+
+### Parámetros básicos de los sistemas de producción
+
+::: r-fit-text
+Big Text
+:::
+
+#### Capacidad
+
+::: r-fit-text
+Big Text
+:::
+
+#### Tiempo de ciclo
+
+### Little's Law
+
+### Producción y lotes de transferencia
+
+## Planeación de la capacidad de producción
+
+### Análisis de la capacidad
+
+### Punto de equilibrio
+
+### Overall Equipment Efficiency (OEE)
+
+### Theory of Constraints (TOC)
+
+#### Critical Path Method
+
+# Módulo II - Balanceo de líneas de producción
+
+## Procesos, procedimientos, actividades, tareas, operaciones
+
+## Líneas de producción
+
+## Sistemas de ensamble
+
+### Clasificación
+
+### Tipos de problemas de ensamble
+
+## Balanceo de líneas de ensamble
+
+### Terminología
+
+### Takt Time
+
+### SALBP
+
+#### SALBP-1
+
+#### SALBP-2
+
+#### SALBP-E
+
+### MOALBP
+
+### UALBP
+
+#### UALBP-1
+
+#### UALBP-2
+
+# Módulo III - Secuenciamiento de tareas
+
+## Production Engineering
+
+## Terminología
+
+## Job Scheduling
+
+## Clasificación del taller
+
+### Single machine
+
+### Parallel machines
+
+### Flow Shop
+
+### Job Shop
+
+### Flexible Flow Shop
+
+### Flexible Job Shop
+
+## Job Scheduling Parameters
+
+## Dispatch Rules
+
+## Dispatch Rules - Performance Measures
+
+### Assotiated to jobs
+
+### Assotiated to machines
+
+## Nomenclaturas de problemas
+
+## Some Scheduling Jobs types...
+
+### Single Machine Scheduling
+
+### Parallel Machines Scheduling
+
+### Flow Shop Scheduling
+
+### Job Shop Scheduling
+
+# Módulo IV - Manufactura esbelta y herramientas tecnológicas
+
+## Mejoramiento continuo
+
+### Just in Time
+
+### 5s
+
+### Kaizen
+
+### SMED
+
+### Poka Yoke
+
+### Six Sigma
+
+#### Lean Six Sigma
+
+## Herramientas empresariales
+
+### Sistemas de información
+
+### Analítica de datos
+
+#### Dashboards
+
+#### Modelos predictivos
+
+#### Modelos

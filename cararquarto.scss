@@ -1,0 +1,30 @@
+/*-- scss:defaults --*/
+$presentation-heading-color: #2C3D4F !default;
+$highlight-color: #28A569;
+
+
+/*-- scss:rules --*/
+
+.reveal .footer {
+  color: #ffffff;
+  background-color: $presentation-heading-color;
+  display: block;
+  position: fixed;
+  padding-bottom: 12px;
+  padding-top: 12px;
+  width: 100%;
+  text-align: center;
+  font-size: 18px;
+  z-index: 2;
+}
+
+
+.reveal .controls {
+  color: $highlight-color;
+}
+
+.reveal .progress {
+  background: $presentation-heading-color;
+  color: $highlight-color
+}
+
