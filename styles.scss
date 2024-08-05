@@ -15,6 +15,10 @@ z-index: -1 !important;
 }
 
 
+.reveal .slides {
+  margin-left: 0% !important; /* Ajusta este valor según sea necesario */
+  margin-right: 0% !important; /* Ajusta este valor según sea necesario */
+}
 
 .reveal .slide-menu-button {
 display: true !important;

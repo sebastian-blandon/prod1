@@ -11,7 +11,7 @@ format:
     auto-stretch: true
     scrollable: true
     controls: auto
-    margin: 0.16
+    margin: 0.14
     self-contained: true
     chalkboard: false
     theme: [simple, styles.scss]
@@ -72,6 +72,9 @@ library(tidyverse)
 library(knitr)
 library(kableExtra)
 ```
+
+#
+![](0_Figures/0_Shop-floor-management.jpg)
 
 # Introducción
 
