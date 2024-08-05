@@ -495,7 +495,7 @@ X2 <- c(0.30,0.25,0.45,0.15,800,30,15)
 X3 <- c(0.30,0.35,0.50,0.15,750,40,20)
 X4 <- c(0.25,0.30,0.40,0.10,600,20,10)
 X5 <- c(0.15,0.10,0.22,0.05,500,10,8)
-X6 <- c(1000,1000,1000,1000,"-","-","-")
+X6 <- c(1000,500,302,700,"-","-","-")
 
 df <- as_tibble(cbind(X1,X2,X3,X4,X5,X6))
 colnames(df) <- titulos
@@ -503,6 +503,7 @@ df %>%
   kbl(align = "c") %>% 
   kable_material(c("striped", "hover")) %>% 
   row_spec(1:nrow(df), extra_css = "text-align: center; vertical-align: middle;") %>% 
+  add_header_above(c(" "=1, "Tiempo requerido por área (hr)"=4," "=1)) %>% 
   scroll_box(width = "100%", height = "400px")
 ```
 
@@ -523,9 +524,9 @@ $\begin{align*}
 &\text{...} - 8\max\{500-X_{4},0\} \\
 \text{s.a:} \\
 0.3X_{1} + 0.3X_{2} +  0.25X_{3} + 0.15X_{4} &\leq 1000 ~\text{(Corte)} \\
-0.25X_{1} + 0.35X_{2} + 0.3X_{3} + 0.1X_{4} &\leq 1000  ~\text{(Aislamiento)} \\
-0.45X_{1} + 0.5X_{2} + 0.4X_{3} + 0.22X_{4} &\leq 1000  ~\text{(Costura)} \\
-0.15X_{1} + 0.15X_{2} + 0.1X_{3} + 0.05X_{4} &\leq 1000 ~\text{(Empaque)} \\
+0.25X_{1} + 0.35X_{2} + 0.3X_{3} + 0.1X_{4} &\leq 500  ~\text{(Aislamiento)} \\
+0.45X_{1} + 0.5X_{2} + 0.4X_{3} + 0.22X_{4} &\leq 302  ~\text{(Costura)} \\
+0.15X_{1} + 0.15X_{2} + 0.1X_{3} + 0.05X_{4} &\leq 700 ~\text{(Empaque)} \\
 X_{1} &\leq 800 ~\text{(Demanda de chamarras)} \\
 X_{2} &\leq 750 ~\text{(Demanda de relleno de plumas)} \\
 X_{3} &\leq 600 ~\text{(Demanda de pantalones)} \\
@@ -555,72 +556,173 @@ X_{i} &\leq Demanda_{i} ~\forall ~i \in M ~\text{(Demanda de i)} \\
 X_{i} &\geq 0 ~\forall ~i \in M ~\text{(No negatividad)} \\
 \\
 \text{Donde:} \\
+X_{i} &= \text{Cantidad a fabricar del producto i} \\
+M &= \text{Conjunto de productos}
+\end{align*}$
+:::
+
+
+#### Notación compacta
+
+::: small-text
+$\begin{align*}
+\text{max } Z(X) &= \sum_{i = 1}^{M} (Utilidad_{i} \ast X_{i}  \\ 
+&\text{...} - Penalidad_{i} \ast \max\{Demanda_{i}-X_{i},0\}) \\
+\text{s.a:} \\
+\sum_{i = 1}^{M} Tiempo_{i,j} \ast X_{i} &\leq TiempoDisponible_{j} ~\forall ~(i,j) \in \text{{Productos,Area}} \\
+X_{i} &\leq Demanda_{i} ~\forall ~i \in Productos \\
+X_{i} &\geq 0 ~\forall ~i \in Productos \\
+\\
+\text{Donde:} \\
 X_{i} &= \text{Cantidad a fabricar del producto i}
 \end{align*}$
 :::
 
 ### Archivo mod - Notación compacta
 
-```{.python code-line-numbers="1|2"}
+```{.python code-line-numbers="1|2|4|5|6|7|9|10|11|12|13|14|16-17|19-21|23-26|28-30|32-33|35-39"}
 reset; # Elimina las variables, parametros y soluciones previas
 model; # Indica el inicio del modelo
 
 # Conjuntos
-set Productos; # Conjunto de productos
+param M integer >=0; # Cantidad de productos
+set Productos:= 1..M; # Conjunto de productos
+set Areas; # Conjuntos de areas de produccion
 
 # Parametros
+param Utilidad{Productos} >=0; # Utilidad unitaria por producto
+param Penalidad{Productos} >=0; # Penalidad unitaria por demanda no cubierta
+param Demanda{Productos} >=0; # Demanda por tipo de producto
+param TiempoRequerido{Productos, Areas} >=0; # Tiempo requerido por el producto i en el area j
+param TiempoDisponible{Areas} >=0; # Tiempo disponible  
 
 # Variables
-var X{Productos} >=0; # Cantidad a fabricar de cada producto
+var X{Productos} integer >=0; # Cantidad a fabricar del producto i
 
 # Funcion objetivo
+maximize Z:
+	sum{i in Productos} (Utilidad[i]*X[i] - Penalidad[i]*max(Demanda[i]-X[i], 0));
 
 # Restricciones
+s.t. Tiempo{(i,j) in {Productos,Areas}}:
+	TiempoRequerido[i,j]*X[i] <= TiempoDisponible[j]
+;
 
+s.t. Demandas{i in Productos}:
+	X[i] <= Demanda[i]
+;
 
 # Datos
-data AMPL_ejemplo2.dat; # Indica de dónde extraer los datos
+data 0_AMPL_Ejemplo2Compacto.dat; # Indica de donde extraer los datos
 
 # Opciones del solver
 option solver highs;
-expand; # Expande el modelo, sirve para validar
+expand;
 solve;
 display Z, X;
 ```
 
+### Archivo dat - Notación compacta
+
+```{.python code-line-numbers="1|3|5-11|13-30|32-37"}
+param M:= 4; # Cantidad de productos
+
+set Areas:= Corte Aislamiento Costura Empaque;
+
+param:
+	Utilidad	Penalidad	Demanda:=
+1		30			15			800
+2		40			20			750
+3		20			10			600
+4		10			8			500
+;
+
+param TiempoRequerido:=
+1 Corte 0.3
+1 Aislamiento 0.25 
+1 Costura 0.45
+1 Empaque 0.15
+2 Corte 0.3
+2 Aislamiento 0.35 
+2 Costura 0.5
+2 Empaque 0.15
+3 Corte 0.25
+3 Aislamiento 0.3 
+3 Costura 0.4
+3 Empaque 0.1
+4 Corte 0.15
+4 Aislamiento 0.1 
+4 Costura 0.22
+4 Empaque 0.05
+;
+
+param TiempoDisponible:=
+Corte 1000
+Aislamiento 500 
+Costura 302
+Empaque 700
+;
+```
+
+
+## Solución
+![](0_Figures/1_AMPL_Ejemplo2SolCompacto.png)
+
 # Módulo I - Producción
+::: nonincremental
+- Generalidades
+- Sistemas de producción
+- Planeación de la capacidad de producción
+- Programación CPM, PERT y LPU
+:::
 
 ## Generalidades
 
 ### Origen elemental
 
-::: r-fit-text
-Big Text
-:::
+![](0_Figures/1_Maslow.jpg)
 
-### Historia
-
-::: r-fit-text
-Big Text
-:::
-
-#### Revoluciones industriales
-
-::: r-fit-text
-Big Text
-:::
-
-#### Personajes importantes
-
-::: r-fit-text
-Big Text
-:::
 
 ### Ciclo de vida del producto
 
-::: r-fit-text
-Big Text
+![](0_Figures/1_ciclo-vida-producto-marketing-1-1.jpg)
+
+### Ciclo de vida del producto
+
+![](0_Figures/1_CICLO-DE-VIDA-PRODUCTO.jpg)
+
+### Revoluciones industriales
+
+![](0_Figures/1_Revoluciones.png)
+
+
+### Sistema de fabricación de montaje
+
+::: columns
+::: {.column width="60%"}
+El modelo T de Ford pasó de tener un tiempo de fabricación de 4 días a un tiempo de 10s, centando las bases de las líneas de ensamble.
+
+{{< video https://www.youtube.com/watch?v=LxF_0LYW-E0 width=100% height="400" >}}
 :::
+
+::: {.column width="40%"}
+![](0_Figures/1_Henry-Ford.jpg){style="height: 40vh; width: auto;"}
+
+![](0_Figures/1_Model-T-1909.jpg){style="height: 30vh; width: auto;"}
+:::
+:::
+
+### Trabajo estandarizado
+
+{{< video https://www.youtube.com/watch?v=H7DA7IrNqJ8 width=100% height="600" >}}
+
+### Trabajo estandarizado
+
+{{< video https://www.youtube.com/watch?v=ztnbxVVBwVA width=100% height="600" >}}
+
+### Automatización
+
+{{< video https://www.youtube.com/watch?v=v-x2AJ9irDI width=100% height="600" >}}
 
 ### Sostenibilidad y sustentabilidad
 
@@ -692,14 +794,19 @@ Big Text
 
 ### Theory of Constraints (TOC)
 
-#### Critical Path Method
+#### Critical Path Method (CPM)
 
 # Módulo II - Gestión de la línea de producción
-{{< video https://www.youtube.com/embed/VuEbYhyPxPA width=100% height="600" >}}
+::: nonincremental
+- Production engineering
+- Sistemas de ensamble
+- Sequenciamiento de ensambles
+- Balanceo de líneas de ensamble
+:::
 
 ## Procesos, procedimientos, actividades, tareas, operaciones
+{{< video https://www.youtube.com/embed/VuEbYhyPxPA width=100% height="600" >}}
 
-## Programación CPM, PERT y LPU
 
 ## Production Engineering
 
@@ -732,6 +839,13 @@ Big Text
 #### UALBP-2
 
 # Módulo III - Secuenciamiento de tareas
+::: nonincremental
+- Job scheduling
+- Clasificación del taller
+- Job scheduling parameters
+- Dispatch rules
+- Tipos de problemas de job scheduling
+:::
 
 ## Terminología
 
