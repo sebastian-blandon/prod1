@@ -572,12 +572,13 @@ $\begin{align*}
 \text{max } Z(X) &= \sum_{i = 1}^{M} (Utilidad_{i} \ast X_{i}  \\ 
 &\text{...} - Penalidad_{i} \ast \max\{Demanda_{i}-X_{i},0\}) \\
 \text{s.a:} \\
-\sum_{i = 1}^{M} Tiempo_{i,j} \ast X_{i} &\leq TiempoDisponible_{j} ~\forall ~(i,j) \in \text{{Productos,Area}} \\
+\sum_{i = 1}^{M} Tiempo_{i,j} \ast X_{i} &\leq TiempoDisponible_{j} ~\forall ~j \in \text{Area} \\
 X_{i} &\leq Demanda_{i} ~\forall ~i \in Productos \\
 X_{i} &\geq 0 ~\forall ~i \in Productos \\
 \\
 \text{Donde:} \\
-X_{i} &= \text{Cantidad a fabricar del producto i}
+X_{i} &= \text{Cantidad a fabricar del producto i} \\
+M &= \text{Cantidad de productos}
 \end{align*}$
 :::
 
