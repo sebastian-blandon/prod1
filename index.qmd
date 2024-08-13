@@ -302,9 +302,9 @@ N &= \{A, B, C\}
 - Datos
 - Parámetros del solver
 
-### Archivo mod - Notación expandida
+### Esquema del archivo mod - Notación expandida
 
-```{.python code-line-numbers="1|2|4|6|8|10"}
+```{.python}
 reset; # Elimina las variables, parametros y soluciones previas
 model; # Indica el inicio del modelo
 
@@ -320,7 +320,7 @@ model; # Indica el inicio del modelo
 
 ### Archivo mod - Notación expandida
 
-```{.python code-line-numbers="1|2|4|5|6|7|9|10|12|13,14|16,17|19,20|22,23|25|26|27|28"}
+```{.python code-line-numbers="1|2|9,10|4,5|4,6|4,7|12-14|12,16,17|12,19,20|12,22,23|25,26|25,27|25,28"}
 reset; # Elimina las variables, parametros y soluciones previas
 model; # Indica el inicio del modelo
 
@@ -352,9 +352,9 @@ display Z, X_A, X_B, X_C;
 ```
 
 
-### Archivo mod - Notación compacta
+### Esquema del archivo mod - Notación compacta
 
-```{.python code-line-numbers="1|2|4|6|8|10|12|14|16"}
+```{.python}
 reset; # Elimina las variables, parametros y soluciones previas
 model; # Indica el inicio del modelo
 
@@ -375,7 +375,7 @@ model; # Indica el inicio del modelo
 
 ### Archivo mod - Notación compacta
 
-```{.python code-line-numbers="1|2|4|5|7|8|9|10|11|12|13|14|16|17|19|20,21|23|24,25|27,28|30,31|33,34|36|37|39|40|41|42|43"}
+```{.python code-line-numbers="1|2|19-21|4,5|7,8|16,17|23-25|7,9,10|23,27,28|7,11,12|23,30,31|7,13,14|23,33,34|36,37|39,40|39,41|39,42|39,43"}
 reset; # Elimina las variables, parametros y soluciones previas
 model; # Indica el inicio del modelo
 
@@ -385,10 +385,10 @@ set N; # Conjunto de materias primas
 # Parametros
 param Costo{N} >=0; # Costo de cada materia prima
 param Azucar{N} >=0; # Aporte de azucar de cada mp
-param Grasa{N} >=0; # Aporte de grasa de cada mp
-param Proteinas{N} >=0; # Aporte de proteinas de cada mp
 param minimo_azucar >=0;
+param Grasa{N} >=0; # Aporte de grasa de cada mp
 param maximo_grasa >=0;
+param Proteinas{N} >=0; # Aporte de proteinas de cada mp
 param minimo_proteinas >=0;
 
 # Variables
@@ -423,7 +423,7 @@ display Z, X;
 
 ### Archivo dat - Notación compacta
 
-```{.python code-line-numbers="1|2|4|5|6|7|8|10|11|12|13|15|16|17|18|20|21|22|23|25|26|27"}
+```{.python code-line-numbers="1,2|4-8|4,10-13|4,15-18|20-23|25-27"}
 # Conjuntos
 set N:= A B C;
 
@@ -455,7 +455,7 @@ param minimo_proteinas:= 0.52;
 
 ### Archivo dat (Alternativa) - Notación compacta
 
-```{.python code-line-numbers="1|2|4|5|6-9|10|12|13|14"}
+```{.python code-line-numbers="1,2|4-10|4,12-14"}
 # Conjuntos
 set N:= A B C;
 
@@ -584,7 +584,7 @@ M &= \text{Cantidad de productos}
 
 ### Archivo mod - Notación compacta
 
-```{.python code-line-numbers="1|2|4|5|6|7|9|10|11|12|13|14|16-17|19-21|23-26|28-30|32-33|35-39"}
+```{.python code-line-numbers="1,2|19-21|4-6|9,10|9,11|9,12|16,17|23-26|4,7|9,13|9,14|28-30|32,33|35,36|35,37|35,38|35,39"}
 reset; # Elimina las variables, parametros y soluciones previas
 model; # Indica el inicio del modelo
 
@@ -729,60 +729,179 @@ El modelo T de Ford pasó de tener un tiempo de fabricación de 4 días a un tie
 {{< video https://www.youtube.com/watch?v=v-x2AJ9irDI width=100% height="600" >}}
 
 ### Sostenibilidad y sustentabilidad
-
-::: r-fit-text
-Big Text
+::: columns
+::: {.column width="70%"}
+![](0_Figures/1_SostenibilidadSustentabilidad.jpg){style="height: 80vh; width: auto;"}
 :::
+
+::: {.column width="30%"}
+![](0_Figures/1_ODS1.png)
+**SDG**
+
+**ODS**
+
+:::
+:::
+
+### Sostenibilidad y sustentabilidad
+![](0_Figures/1_ODS2.png)
 
 ## Sistemas de producción
 
-### Categorización
+### Ingeniería de sistemas de producción
+![](0_Figures/1_IngenieriaProduccion.png)
 
-::: r-fit-text
-Big Text
+### Algunas empresas manufactureras de la región
+
+::: columns
+
+::: {.column width="25%"}
+![](0_Figures/1_Logo_Argos.png){style="height: 20vh; width: auto;"}
+![](0_Figures/1_Logo_Busscar.png){style="height: 20vh; width: auto;"}
+![](0_Figures/1_Logo_Coats.png){style="height: 20vh; width: auto;"}
 :::
 
-### Sistemas de producción
-
-::: r-fit-text
-Big Text
+::: {.column width="25%"}
+![](0_Figures/1_Logo_Co&Tex.png){style="height: 20vh; width: auto;"}
+![](0_Figures/1_Logo_Frisby.jpg){style="height: 20vh; width: auto;"}
+![](0_Figures/1_Logo_Suzuki.png){style="height: 20vh; width: auto;"}
 :::
 
-### Distribución en planta
+::: {.column width="25%"}
+![](0_Figures/1_Logo_Hitachi.jpg){style="height: 20vh; width: auto;"}
+![](0_Figures/1_Logo_Ingenio.png){style="height: 20vh; width: auto;"}
+![](0_Figures/1_Logo_Licorera.png){style="height: 20vh; width: auto;"}
+:::
 
-::: r-fit-text
-Big Text
+::: {.column width="25%"}
+![](0_Figures/1_Logo_Magnetron.png){style="height: 20vh; width: auto;"}
+![](0_Figures/1_Logo_Super.png){style="height: 20vh; width: auto;"}
+![](0_Figures/1_Logo_Vo5.png){style="height: 20vh; width: auto;"}
+:::
+
 :::
 
 ### Procesos industriales
 
 #### Procesos continuos
+::: columns
+
+::: {.column width="50%"}
+![](0_Figures/1_ProcContinuos1.jpg)
+:::
+
+::: {.column width="50%"}
+![](0_Figures/1_ProcContinuos2.jpg)
+:::
+
+:::
 
 #### Procesos discretos
+::: columns
 
-::: r-fit-text
-Big Text
+::: {.column width="50%"}
+![](0_Figures/1_ProcDiscretos1.jpg)
 :::
+
+::: {.column width="50%"}
+![](0_Figures/1_ProcDiscretos2.jpg)
+:::
+
+:::
+
+#### Procesos mixtos
+::: columns
+
+::: {.column width="50%"}
+![](0_Figures/1_ProcMixto1.png)
+:::
+
+::: {.column width="50%"}
+![](0_Figures/1_ProcMixto2.jpg)
+:::
+
+:::
+
 
 ### Diseño del proceso
+![](0_Figures/1_Diseño_Proceso.png)
 
+
+### Distribución en planta
+
+#### Distribution by product
 ::: r-fit-text
-Big Text
+La maquinaria y el equipo se colocan de manera que el producto siempre siga la misma ruta a través de la planta. En lugar de la programación diaria, el problema crítico es establecer y balancear las tareas que se realizan en la línea de producción para asegurar una operación estable. **Flujo en línea**
 :::
 
-### Parámetros básicos de los sistemas de producción
+![](0_Figures/1_DistribucionProducto.png)
 
+
+#### Distribution by process
 ::: r-fit-text
-Big Text
+Se agrupan las máquinas similares en una zona determinada de la planta. Por ejemplo, en un taller de maquinado, los tornos se colocan en un área, las fresadoras en otras y las cortadoras en otra.
+
+De esta forma el producto sólo se lleva hasta las áreas que requiere para su transformación. **Flujo flexible**
 :::
 
-#### Capacidad
+![](0_Figures/1_DistribucionProceso.png)
 
-::: r-fit-text
-Big Text
+::: notes
+Lathe: torno
+
+Milling: fresadora
+
+Drill: perforadora
+
+Grinding: molienda
 :::
 
-#### Tiempo de ciclo
+#### Distribution by cells or groups
+::: r-fit-text
+La maquinaria se agrupa en pequeñas área de trabajo, formando pequeñas líneas de producción que procesan familias de productos. Esta distribución es un híbrido entre la distribución por producto y la distribución por proceso, diferenciándose principalmente por su característica de producir por lotes.
+:::
+
+![](0_Figures/1_DistribucionCeldas.png)
+
+
+#### Distribution by project
+::: r-fit-text
+El producto final generalmente por sus dimensiones o la dificultad de su transporte, se queda en un sitio fijo, mientras la maquinaria, materiales, equipos y operarios se mueven hasta él. Algunos ejemplos de esta distribución son la fabricación de aviones, barcos y la construcción de edificios.
+:::
+
+![](0_Figures/1_DistribucionProyecto.jpg)
+
+### Process design
+![](0_Figures/1_DiseñoProceso.png)
+
+### Productive factors
+Los **factores de producción** son todos aquellos recursos como maquinaria, materiales y mano de obra que son empleados en los procesos de manufactura y en la prestación de servicios.
+
+Por otra parte, los **factores productivos** son medidas que permiten determinar la cantidad de recursos a utilizar en una línea de procesos para cumplir con la demanda de un producto o la prestación de un servicio. Estas medidas también permiten caracterizar el sistema productivo en términos de la capacidad del proceso y sus derivados.
+
+
+#### Factores productivos elementales
+- **Cycle time [C]:** marca la frecuencia a la cual sale una pieza de una estación de trabajo. El tiempo de la estación más lenta marca el ritmo de producción $time \over uni$ .
+
+- **Production capacity [Cp]:** es la cantidad de piezas por unidad de tiempo que puede producir una estación de trabajo $uni \over time$
+
+
+#### Factores productivos de estaciones en serie
+![](0_Figures/1_FactoresProductivos1.png)
+
+#### Factores productivos de estaciones en paralelo
+![](0_Figures/1_FactoresProductivos2.png)
+
+
+#### Factores productivos - ejemplo 1
+![](0_Figures/1_FactoresProductivos3.png)
+
+#### Factores productivos - ejemplo 2
+![](0_Figures/1_FactoresProductivos4.png)
+
+#### Factores productivos - ejemplo 3
+![](0_Figures/1_FactoresProductivos5.png)
+
 
 ### Little's Law
 
