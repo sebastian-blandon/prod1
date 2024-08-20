@@ -933,9 +933,38 @@ Por otra parte, los **factores productivos** son medidas que permiten determinar
 ![](0_Figures/1_FactoresProductivos5.png)
 
 
-### Little's Law
+## Little's Law
+::: columns
+::: {.column width="55%"}
+![](0_Figures/1_Little1.png)
+:::
 
-### Producción y lotes de transferencia
+::: {.column width="45%"}
+$$
+WIP = TS \times TH
+$$
+
+*donde:*
+
+$$
+\begin{align}
+& \textbf{WIP: } \text{Work in Process} \\
+& \textbf{TS: } \text{Time System (time)} \\
+& \textbf{TH: } \text{Throughput Time } (\frac{units}{time})
+\end{align}
+$$
+:::
+:::
+
+## Operation Time Diagram [OT]
+![](0_Figures/1_Little2.png)
+
+## Little's law "a pedal"
+![](0_Figures/1_Little3.png)
+
+
+
+## Producción y lotes de transferencia
 
 ## Planeación de la capacidad de producción
 
