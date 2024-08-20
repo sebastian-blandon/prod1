@@ -906,6 +906,7 @@ El producto final generalmente por sus dimensiones o la dificultad de su transpo
 ### Productive factors
 Los **factores de producción** son todos aquellos recursos como maquinaria, materiales y mano de obra que son empleados en los procesos de manufactura y en la prestación de servicios.
 
+### Productive factors
 Por otra parte, los **factores productivos** son medidas que permiten determinar la cantidad de recursos a utilizar en una línea de procesos para cumplir con la demanda de un producto o la prestación de un servicio. Estas medidas también permiten caracterizar el sistema productivo en términos de la capacidad del proceso y sus derivados.
 
 
