@@ -212,10 +212,7 @@ df %>%
   row_spec(1:nrow(df), extra_css = "text-align: center; vertical-align: middle;")
 ```
 
-¿Cuánto deberían mezclar de cada una de las tres si se desea minimizar
-el costo para preparar 1kg de alimento, cuyo contenido de azúcar no sea
-menor a 10%, su contenido de grasa no mayor a 9.5% y su contenido de
-proteínas no menor de 52%?
+¿Cuánto deberían mezclar de cada una de las tres si se desea minimizar el costo para preparar 1kg de alimento, cuyo contenido de azúcar no sea menor a 10%, su contenido de grasa no mayor a 9.5% y su contenido de proteínas no menor de 52%?
 :::
 
 #### Notación expandida
@@ -492,7 +489,7 @@ En preparación para la temporada invernal, una compañía fabricante de ropa es
 La compañía recibió pedidos en firme de sus productos, el contrato estipula una penalización por los artículos no surtidos. Elabore un plan de producción óptimo para la compañía, con base en los siguientes datos:
 
 ```{r}
-titulos <- c("Departamento", "Chamarras", "Relleno de plumas", "Pantalones", "Guantes", "Capacidad (hr)")
+titulos <- c("Departamento", "Abrigos", "Chamarras", "Pantalones", "Guantes", "Capacidad (hr)")
 X1 <- c("Corte", "Aislamiento", "Costura", "Empaque", "Demanda", "Utilidad ($/uni)", "Penalización por unidad ($/uni)")
 X2 <- c(0.30,0.25,0.45,0.15,800,30,15)
 X3 <- c(0.30,0.35,0.50,0.15,750,40,20)
@@ -510,10 +507,7 @@ df %>%
   scroll_box(width = "100%", height = "400px")
 ```
 
-¿Cuánto deberían mezclar de cada una de las tres si se desea minimizar
-el costo para preparar 1kg de alimento, cuyo contenido de azúcar no sea
-menor a 10%, su contenido de grasa no mayor a 9.5% y su contenido de
-proteínas no menor de 52%?
+¿Cuántas unidades se deben producir de cada producto para maximizar la utilidad?
 
 
 #### Notación expandida
@@ -530,15 +524,15 @@ $\begin{align*}
 0.25X_{1} + 0.35X_{2} + 0.3X_{3} + 0.1X_{4} &\leq 500  ~\text{(Aislamiento)} \\
 0.45X_{1} + 0.5X_{2} + 0.4X_{3} + 0.22X_{4} &\leq 302  ~\text{(Costura)} \\
 0.15X_{1} + 0.15X_{2} + 0.1X_{3} + 0.05X_{4} &\leq 700 ~\text{(Empaque)} \\
-X_{1} &\leq 800 ~\text{(Demanda de chamarras)} \\
-X_{2} &\leq 750 ~\text{(Demanda de relleno de plumas)} \\
+X_{1} &\leq 800 ~\text{(Demanda de abrigos)} \\
+X_{2} &\leq 750 ~\text{(Demanda de chamarras)} \\
 X_{3} &\leq 600 ~\text{(Demanda de pantalones)} \\
 X_{4} &\leq 500 ~\text{(Demanda de guantes)} \\
 X_{1}, X_{2}, X_{3}, X_{4} &\geq 0 ~\text{(No negatividad)} \\
 \\
 \text{Donde:} \\
-X_{1} &= \text{Cantidad a fabricar de chamarras} \\
-X_{2} &= \text{Cantidad a fabricar de relleno de plumas} \\
+X_{1} &= \text{Cantidad a fabricar de abrigos} \\
+X_{2} &= \text{Cantidad a fabricar de chamarras} \\
 X_{3} &= \text{Cantidad a fabricar de pantalones} \\
 X_{4} &= \text{Cantidad a fabricar de guantes}
 \end{align*}$
