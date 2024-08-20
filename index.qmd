@@ -959,16 +959,94 @@ $$
 ## Operation Time Diagram [OT]
 ![](0_Figures/1_Little2.png)
 
-## Little's law "a pedal"
+## Little's law - ejemplo "a pedal"
 ![](0_Figures/1_Little3.png)
 
+## Little's law - ejemplo "a pedal"
+![](0_Figures/1_Little5.png)
+
+## Little's law - ejemplo
+::: smaller-text
+![](0_Figures/1_Little4.png)
+
+Considerando una lı́nea de ensamble de computadores ilustrada en la gráfica en la cual el número de máquinas por estación es 1, 2, 1, 1 y 1, respectivamente, determine para el mejor caso:
+
+1. La estación cuello de botella.
+2. Bajo un sistema CONWIP, el WIP crítico $W_{0}$.
+3. ¿Cuál es el número mı́nimo de unidades de WIP que mantendrı́a en el sistema CONWIP para maximizar la tasa de producción? ¿Cuál serı́a entonces la tasa de producción y el tiempo en el sistema?
+4. ¿Cuál serı́a el número máximo de unidades de WIP que mantendrı́a en el sistema CONWIP para minimizar el tiempo en el sistema? ¿Cuál serı́a entonces la tasa de producción y el tiempo en el sistema?
+:::
+
+## Production and Transfer Batch
+- **Production Lot [Q]** : es la cantidad total de producto que se pretende obtener en el proceso de fabricación.
+- **Transfer Lot [L]** : cantidad de producto que se transfiere desde una operación hacia la siguiente, puede coincidir con el lote de producción o puede ser una fracción del mismo que ya esté listo como un contenedor o una pieza.
 
 
-## Producción y lotes de transferencia
+## Production and Transfer Batch
+![](0_Figures/1_TransferBatch1.png)
+
+## Production and Transfer Batch
+![](0_Figures/1_TransferBatch2.png)
+
+## Production and Transfer Batch
+![](0_Figures/1_TransferBatch3.png)
+
+### Throughput time
+$$
+\begin{align}
+& \mathbf{Q = } \text{Total production lot} \\
+& \mathbf{C_{i} = } \text{Cycle Time Operation i} \\
+& \mathbf{L_{i} = } \text{Transfer Lot Size Operation i} \\
+& \mathbf{T_{i} = } \text{Initial Time Operation i} \\
+& \mathbf{F_{i} = } \text{Ending Time Operation i}
+\end{align}
+$$
+
+### Throughput time - example
+![](0_Figures/1_TransferBatch4.png)
+
+### Throughput time
+**Initial Time Operation i**
+$$
+\mathbf{T_{i}} = Max\{T_{i-1} + (C_{i-1} \times L_{i-1}) ; T_{i-2} + (C_{i-2} \times L_{i-1}) + C_{i-1} \}
+$$
+
+**Ending Time Operation i**
+$$
+\mathbf{F_{i}} = Max\{T_{i} + (C_{i} \times Q) ; F_{i-1} + (C_{i} \times L_{i-1}) \}
+$$
+
+### Ejemplo
+::: small-text
+::: columns
+::: {.column width="60%"}
+En una línea de manufactura que cuenta con cinco operaciones se debe fabricar un lote de 10 unidades, los tiempos de ciclo $(\frac{min}{uni})$ y los lotes de transferencia en unidades de cada operación se muestran en la tabla.
+
+1. Determina el tiempo de inicio de cada operación acorde al lote de transferencia.
+2. Determina el tiempo en el cual cada operación termina de fabricar el lote total de 10 unidades.
+3. ¿Cuál es el Troughput Time y la Capacidad de producción de la línea?
+:::
+
+::: {.column width="40%"}
+![](0_Figures/1_TransferBatch5.png)
+:::
+:::
+:::
+
+### Ejemplo - Respuesta
+![](0_Figures/1_TransferBatch6.png)
+![](0_Figures/1_TransferBatch7.png)
+
 
 ## Planeación de la capacidad de producción
 
 ### Análisis de la capacidad
+**Ejemplo**
+
+Una empresa manufactura posee una capacidad instalada de $100 \frac{uni}{hr}$. En el último mes se contó con 20 días laborales de $8 hr$, y se tuvo reporte de que la producción en dicho mes fue de $10,000 \frac{uni}{mes}$. El departamento de producción reportó un total de $20 hr$ de tiempo no productivo entre pausas activas, actividades de mantenimiento, reuniones, capacitaciones, entre otras.
+
+Determina: la capacidad instalada, teórica, real, utilizada y ociosa. Da las respuestas en $\frac{uni}{mes}$.
+
 
 ### Punto de equilibrio
 
