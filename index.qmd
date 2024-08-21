@@ -760,7 +760,7 @@ El modelo T de Ford pasó de tener un tiempo de fabricación de 4 días a un tie
 ### Sostenibilidad y sustentabilidad
 ::: columns
 ::: {.column width="70%"}
-![](0_Figures/1_SostenibilidadSustentabilidad.jpg){style="height: 80vh; width: auto;"}
+![](0_Figures/1_SostenibilidadSustentabilidad.jpg){width="70%"}
 :::
 
 ::: {.column width="30%"}
@@ -785,27 +785,27 @@ El modelo T de Ford pasó de tener un tiempo de fabricación de 4 días a un tie
 ::: columns
 
 ::: {.column width="25%"}
-![](0_Figures/1_Logo_Argos.png){style="height: 20vh; width: auto;"}
-![](0_Figures/1_Logo_Busscar.png){style="height: 20vh; width: auto;"}
-![](0_Figures/1_Logo_Coats.png){style="height: 20vh; width: auto;"}
+![](0_Figures/1_Logo_Argos.png){width="80%"}
+![](0_Figures/1_Logo_Busscar.png){width="80%"}
+![](0_Figures/1_Logo_Coats.png){width="80%"}
 :::
 
 ::: {.column width="25%"}
-![](0_Figures/1_Logo_Co&Tex.png){style="height: 20vh; width: auto;"}
-![](0_Figures/1_Logo_Frisby.jpg){style="height: 20vh; width: auto;"}
-![](0_Figures/1_Logo_Suzuki.png){style="height: 20vh; width: auto;"}
+![](0_Figures/1_Logo_Co&Tex.png){width="80%"}
+![](0_Figures/1_Logo_Frisby.jpg){width="80%"}
+![](0_Figures/1_Logo_Suzuki.png){width="80%"}
 :::
 
 ::: {.column width="25%"}
-![](0_Figures/1_Logo_Hitachi.jpg){style="height: 20vh; width: auto;"}
-![](0_Figures/1_Logo_Ingenio.png){style="height: 20vh; width: auto;"}
-![](0_Figures/1_Logo_Licorera.png){style="height: 20vh; width: auto;"}
+![](0_Figures/1_Logo_Hitachi.jpg){width="80%"}
+![](0_Figures/1_Logo_Ingenio.png){width="80%"}
+![](0_Figures/1_Logo_Licorera.png){width="80%"}
 :::
 
 ::: {.column width="25%"}
-![](0_Figures/1_Logo_Magnetron.png){style="height: 20vh; width: auto;"}
-![](0_Figures/1_Logo_Super.png){style="height: 20vh; width: auto;"}
-![](0_Figures/1_Logo_Vo5.png){style="height: 20vh; width: auto;"}
+![](0_Figures/1_Logo_Magnetron.png){width="80%"}
+![](0_Figures/1_Logo_Super.png){width="80%"}
+![](0_Figures/1_Logo_Vo5.png){width="80%"}
 :::
 
 :::
