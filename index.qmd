@@ -96,7 +96,7 @@ library(kableExtra)
 ![](0_Figures/0_ContenidoProduccion1.png)
 
 ## Contenido
-{{< pdf /0_Resources/II8A3_Produccion_I.pdf width=100% height=620 >}}
+{{< pdf /prod1/0_Resources/II8A3_Produccion_I.pdf width=100% height=620 >}}
 
 ## Evaluación
 
