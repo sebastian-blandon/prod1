@@ -10,7 +10,7 @@ format:
   revealjs:
     auto-stretch: true
     scrollable: true
-    controls: auto
+    controls: true
     margin: 0.14
     self-contained: true
     chalkboard: false
