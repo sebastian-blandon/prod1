@@ -197,19 +197,19 @@ enseguida:
 
 ```{r}
 titulos <- c("Materia prima", "Costo $/kg", "Azúcares %", "Grasas %", "Proteínas %", "Inertes %")
-X1 <- c("A","B","C")
-X2 <- c(2.35,2,1.7)
-X3 <- c(12,10,8)
-X4 <- c(10,10,6)
-X5 <- c(60,50,44)
-X6 <- c(18,30,42)
+X1 <- c("A", "B", "C")
+X2 <- c(2.35, 2, 1.7)
+X3 <- c(12, 10, 8)
+X4 <- c(10, 10, 6)
+X5 <- c(60, 50, 44)
+X6 <- c(18, 30, 42)
 
-df <- as_tibble(cbind(X1,X2,X3,X4,X5,X6))
+df <- as_tibble(cbind(X1, X2, X3, X4, X5, X6))
 colnames(df) <- titulos
-df %>% 
-  kbl(align = "c") %>% 
-  kable_material(c("striped", "hover")) %>% 
-  row_spec(1:nrow(df), extra_css = "text-align: center; vertical-align: middle;")
+df %>%
+    kbl(align = "c") %>%
+    kable_material(c("striped", "hover")) %>%
+    row_spec(1:nrow(df), extra_css = "text-align: center; vertical-align: middle;")
 ```
 
 ¿Cuánto deberían mezclar de cada una de las tres si se desea minimizar el costo para preparar 1kg de alimento, cuyo contenido de azúcar no sea menor a 10%, su contenido de grasa no mayor a 9.5% y su contenido de proteínas no menor de 52%?
