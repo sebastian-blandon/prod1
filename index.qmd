@@ -1001,6 +1001,8 @@ Considerando una lı́nea de ensamble de computadores ilustrada en la gráfica e
 ## Production and Transfer Batch
 ![](0_Figures/1_TransferBatch3.png)
 
+
+
 ### Throughput time
 $$
 \begin{align}
@@ -1047,6 +1049,22 @@ En una línea de manufactura que cuenta con cinco operaciones se debe fabricar u
 ![](0_Figures/1_TransferBatch6.png)
 ![](0_Figures/1_TransferBatch7.png)
 
+
+### Just in Time (JIT)
+
+![](0_Figures/1_JIT1.png)
+
+### Just in Time (JIT)
+
+![](0_Figures/1_JIT2.png)
+
+### Just in Time (JIT)
+
+![](0_Figures/1_JIT3.png)
+
+### Mudas en producción
+
+![](0_Figures/1_Mudas.png)
 
 ## Planeación de la capacidad de producción
 
