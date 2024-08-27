@@ -74,7 +74,13 @@ library(kableExtra)
 ```
 
 #
-![](0_Figures/0_Shop-floor-management.jpg)
+![](0_Figures/0_Facility1.jpg)
+
+#
+![](0_Figures/0_Facility2.jpg)
+
+#
+![](0_Figures/0_Facility3.jpg)
 
 # Introducción
 
@@ -711,6 +717,10 @@ Empaque 700
 
 ## Generalidades
 
+###
+
+![](0_Figures/1_SupplyChain.png)
+
 ### Origen elemental
 
 ![](0_Figures/1_Maslow.jpg)
@@ -1048,13 +1058,335 @@ Una empresa manufactura posee una capacidad instalada de $100 \frac{uni}{hr}$. E
 Determina: la capacidad instalada, teórica, real, utilizada y ociosa. Da las respuestas en $\frac{uni}{mes}$.
 
 
-### Punto de equilibrio
+### Punto de equilibrio - Brake even point
+
+**Ejercicio** : determina el punto de equilibrio de una empresa de producción, la cual presenta los datos de sus costos y volumen de producción del último mes. El precio de venta del producto es de $\$5$. Los datos están en miles de pesos.
+
+![](0_Figures/1_BrakeEvenPoint.png)
 
 ### Overall Equipment Efficiency (OEE)
 
+El OEE es un indicador que sirve para conocer el grado de utilización de una máquina o un proceso por medio de un valor porcentual, el cual está dado por la siguiente ecuación:
+
+$$
+\textbf{OEE (%)} = \text{Availability} \times \text{Performance} \times \text{Quality}
+$$
+
+### Overall Equipment Efficiency (OEE)
+
+![](0_Figures/1_OEE1.png)
+
+### Overall Equipment Efficiency (OEE)
+
+::: small-text
+$\begin{align*}
+\textbf{Availability} &= \frac{\text{Operative Time}}{\text{Available Time}} \\ 
+\\
+\textbf{Donde:} \\
+\textbf{Available Time [AT] } &= \text{Jornada laboral - Pausas activas - MTTO -} \\
+&\text{... Actividades programadas} \\
+\textbf{Operative Time [OT] } &= \text{AT - Fallo - Setup - Actividades no programadas}
+\end{align*}$
+:::
+
+### Overall Equipment Efficiency (OEE)
+
+::: small-text
+$\begin{align*}
+\textbf{Performance} &= \frac{\text{C} \times \text{Units Processed}}{\text{Operative Time}} \\ 
+\\
+\textbf{Donde:} \\
+\textbf{C} &= \text{Cycle time (menor)} \\
+\textbf{Units Processed} &= \text{Cantidad de unidades que se procesan en la máquina}
+\end{align*}$
+:::
+
+### Overall Equipment Efficiency (OEE)
+
+::: small-text
+$\begin{align*}
+\textbf{Quality} &= \frac{\text{Units processed - Defects - Reworks}}{\text{Units processed}} \\ 
+\\
+\end{align*}$
+:::
+
+### Overall Equipment Efficiency (OEE)
+
+```{r}
+titulos <- c("Factor OEE", "Clase mundial (%)")
+X1 <- c("Availability", "Performance", "Quality", "OEE")
+X2 <- c(90.00, 95.00, 99.90, 85.41)
+
+df <- as_tibble(cbind(X1, X2))
+colnames(df) <- titulos
+df %>%
+    kbl(align = "c") %>%
+    kable_material(c("striped", "hover")) %>%
+    row_spec(1:nrow(df), extra_css = "text-align: center; vertical-align: middle;")
+```
+
+### Overall Equipment Efficiency (OEE)
+
+::: small-text
+- **OEE < 65% [Inaceptable]** : Se producen importantes pérdidas económicas. Muy baja competitividad.
+- **65% < OEE < 75% [Regular]** : Aceptable sólo si se está en proceso de mejora. Pérdidas económicas. Baja competitividad.
+- **75% < OEE < 85% [Aceptable]** : Continuar la mejorar para superar el 85% y avanzar hacia el world class. Ligeras pérdidas económicas. Competitividad ligeramente baja.
+- **85% < OEE < 95% [Buena]** : Entra en valores world class. Buena competitividad.
+- **OEE >= 95% [Excelente]** : Valores World Class. Excelente competitividad.
+:::
+
+### Overall Equipment Efficiency (OEE)
+
+![](0_Figures/1_OEE2.png)
+
+### Overall Equipment Efficiency (OEE)
+
+![](0_Figures/1_OEE3.png)
+
+### Overall Equipment Efficiency (OEE)
+
+![](0_Figures/1_OEE4.png)
+
+### Overall Equipment Efficiency (OEE)
+
+![](0_Figures/1_OEE5.png)
+
+### Overall Equipment Efficiency (OEE)
+
+![](0_Figures/1_OEE6.png)
+
+### Overall Equipment Efficiency (OEE)
+
+::: small-text
+**Conclusiones**
+
+- El OEE es del 56%, lo cual es inaceptable.
+- Los indicadores de Availability y Performance son los más bajos, con un 72% y 85% respectivamente, siendo el indicador de Availability el más crítico.
+- Dentro del indicador de Avaialibility, el tiempo de Setup es el más crítico con valor de 14%, seguido de las fallas en maquinaria con un 6%.
+- El indicador de Performance muestra una eficiencia promedio del 85%, lo cual indica que en el proceso se presentan tiempos ocioso, posiblemente por falta de materiales, baja velocididad de la máquina, bajo desempeño del operario, mal diseño del puesto o método de trabajo.
+:::
+
+### Overall Equipment Efficiency (OEE)
+
+![](0_Figures/1_OEE7.png)
+
 ### Theory of Constraints (TOC)
 
-#### Critical Path Method (CPM)
+{{< video https://youtu.be/6Ly7W9rSnyo width=100% height="600" >}}
+
+### Theory of Constraints (TOC)
+
+::: columns
+::: {.column width="70%"}
+::: small-text
+La Teoría de Restricciones es una herramienta que fue descrita por primera vez por el doctor en física Eliyahu Goldratt como resultado de la combinación de las técnicas de **pensamiento sistémico** , **teoría de colas** y **simulación** , a través de la cual se han generado mejoras sustanciales en la administración de los **recursos restrictivos** (cuellos de botella) en las organizaciones empresariales.
+:::
+:::
+
+::: {.column width="30%"}
+![](0_Figures/1_TOC1.png)
+:::
+:::
+
+### Theory of Constraints (TOC)
+
+![](0_Figures/1_TOC2.png)
+
+#### Principles for managing bottlenecks
+
+::: small-text
+- Evitar cualquier tipo de paro en los cuellos de botella tales como cambios de turno, descansos, mantenimientos, ajustes, cambios de herramientas, etc..., en horarios de producción.
+- Evitar producir en los cuellos de botella piezas que no se requieran de una forma inmediata. Evitar la sobreproducción.
+- Realizar los controles de calidad antes de que el producto ingrese al recurso restrictivo, con el fin de evitar la reducción en capacidad causados por productos defectuosos.
+- Desviar las operaciones de un recurso restrictivo a otros recursos no restrictivos, si es posible.
+- Modificar el diseño de las piezas para eliminar o simplificar las operaciones en los cuellos de botella.
+- Utilizar personal o equipo de bajo rendimiento para apoyar los recursos cuello de botella.
+- Automatizar aquellas tareas que logren una disminución en el tiempo de ciclo del proceso o aumenten la calidad de la operación.
+- Preparaciones y cambios de herramientas rápidos en las máquinas cuello de botella, ya que de esta manera estarán menos tiempo paradas. Aplicación de SMED.
+- Disponer de un Stock de Seguridad frente a los cuellos de botella, para que no le afecten los desequilibrios del sistema.
+:::
+
+#### Steps for managing bottlenecks
+
+::: small-text
+1. Identificar la limitación o cuello de botella dentro del sistema.
+2. Obtener la máxima eficiencia del cuello de botella con acciones como las descritas anteriormente.
+3. Subordinar las tareas de todos los recursos del sistema a la que pueda desarrollar el recurso cuello de botella.
+4. Elevar al máximo la capacidad del recurso cuello de botella, apoyándolo con recursos incluso de menor capacidad.
+5. Cuando un recurso ha dejado de ser un cuello de botella debido a las acciones anteriores, y si se desea que el sistema mejore su eficiencia debe volver a iniciar el proceso de análisis.
+:::
+
+
+### TOC - Example
+
+Realiza la programación de la producción, aplicando la TOC Rule y generando un modelo óptimo de solución. El tiempo disponible es de 2,000 $\frac{min}{semana}$ . La información se presenta en la siguiente tabla:
+
+![](0_Figures/1_TOC3.png)
+
+
+### TOC - Example's answer
+
+::: columns
+::: {.column width="50%"}
+::: small-text
+\begin{align*}
+\text{max } Z(X) &= \sum_{i = 1}^{N} U_{i} \ast X_{i}  \\ 
+
+\textbf{s.a:} \\
+\sum_{i = 1}^{N} P_{i,j} \ast X_{i} &\leq A_{j} ~\forall ~j \in \text{Machines} \\
+X_{i} &\leq D_{i} ~\forall ~i \in Jobs \\
+
+\end{align*}
+:::
+:::
+
+::: {.column width="50%"}
+::: small-text
+\begin{align*}
+\text{Donde:} \\
+X_{i} &= \text{Production units of job i} \\
+P_{i,j} &= \text{Processing Time of job i in} \\
+&\text{    machine j} \\
+U_{i} &= \text{Profit of job i} \\
+D_{i} &= \text{Demand of job i} \\
+A_{j} &= \text{Available Time in machine j}
+\end{align*}
+:::
+:::
+:::
+
+### TOC - Example 2
+
+El departamento de ingeniería de ACME Company desea conocer cuáles son las máquinas o centros de trabajo que representan una restricción dentro de la línea de producción de electrodomésticos. Para ello, ha recoledato los siguientes datos:
+
+![](0_Figures/1_TOC4.png)
+
+### TOC - Example 2
+
+En el último mes, la empresa tenía planeado producir en una jornada de 8hr/día durante 20 días. Los pedidos a los cuales se comprometió el área de producción fueron:
+
+![](0_Figures/1_TOC5.png)
+
+### TOC - Example 2
+
+El departamento de ingeniería cuenta con los siguientes datos:
+
+![](0_Figures/1_TOC6.png)
+
+### TOC - Example 2's answer
+
+![](0_Figures/1_TOC7.png)
+
+
+### Project Management
+
+![](0_Figures/1_CPM1.png)
+
+### Project Management - PERT/CPM Methods
+
+![](0_Figures/1_CPM2.png)
+
+### Project Management
+
+Algunas de las preguntas que pueden surgir al administrar un proyecto son:
+
+- ¿Cuáles son los tiempos de inicio temprano y tardío?
+- ¿Cuál es la holgura de cada tarea?
+- ¿Cuál es la ruta crítica?
+- ¿Cuánto costaría el proyecto bajo ejecución normal y bajo ejecución acelerada?
+- ¿Cómo optimizar la planificación del proyecto?
+
+### Project Management - Example 1
+
+::: r-fit-text
+```{r}
+titulos <- c("ID Actividad", "Descripción de la actividad", "Duración (hr)", "Actividades precedentes")
+X1 <- c("A", "B", "C", "D", "E", "F", "G", "H", "I", "J")
+X2 <- c("Quitar sistema de anclaje", "Desconectar sistema eléctrico", "Desconectar sistema hidráulico", "Quitar molino anterior", "Limpieza y adaptación de sistema de anclaje", "Colocar molino nuevo", "Anclaje molino nuevo", "Conectar sistema eléctrico", "Conectar sistema hidráulico", "Arrancar molino nuevo")
+X3 <- c(4, 1, 2, 4, 2, 3, 2, 1, 4, 4)
+X4 <- c("-", "-", "-", "A,B,C", "D", "E", "F", "F", "F", "G, H, I")
+
+df <- as_tibble(cbind(X1, X2, X3, X4))
+colnames(df) <- titulos
+df %>%
+    kbl(align = "c") %>%
+    kable_material(c("striped", "hover")) %>%
+    row_spec(1:nrow(df), extra_css = "text-align: center; vertical-align: middle;")
+```
+:::
+
+
+### CPM - Costeo del tiempo
+
+![](0_Figures/1_CPM3.png)
+
+### Project Management - Example 2
+
+::: r-fit-text
+```{r}
+titulos <- c("Actividad", "Tiempo normal (hr)", "Tiempo acelerado (hr)", "Costo normal ($)", "Costo acelerado ($)", "Costo horario ($)")
+X1 <- c("A", "B", "C", "D", "E", "F", "G", "H", "I", "J")
+X2 <- c(10, 5, 8, 3, 7, 5, 10, 2, 3, 12)
+X3 <- c(5, 5, 4, 1, 5, 3, 7, 2, 2, 10)
+X4 <- c(5000, 500, 3000, 1000, 4500, 8000, 5000, 5000, 7000, 28000)
+X5 <- c(10000, 500, 6000, 3500, 9500, 12000, 7400, 5000, 8000, 10000)
+X6 <- c(50, 0, 250, 10, 345, 500, 70, 10, 5, 100)
+
+df <- as_tibble(cbind(X1, X2, X3, X4, X5, X6))
+colnames(df) <- titulos
+df %>%
+    kbl(align = "c") %>%
+    kable_material(c("striped", "hover")) %>%
+    row_spec(1:nrow(df), extra_css = "text-align: center; vertical-align: middle;")
+```
+:::
+
+### Project Management - Example 2
+
+::: r-fit-text
+Con base en la tabla anterior, y teniendo en cuenta las precedencias del ejemplo 1:
+
+1. ¿Cuál es la duración del proyecto bajo ejecución normal? ¿Cuál es su costo?
+2. ¿Cuál es la duración del proyecto bajo ejecución acelerada? ¿Cuál es su costo?
+3. ¿Qué se puede concluir de la ejecución del proyecto bajo las modalidades normal y acelerada? Proporciona tantos detalles como sea posible.
+4. ¿Qué sucede si se ejecutan las actividades A, G e I en modalidad acelerada? Proporciona tantos detalles como sea posible.
+:::
+
+#### CPM - Optimization Model
+
+Modelo para minimizar el costo de ejecución de un proyecto.
+
+::: small-text
+\begin{align*}
+\text{min } Z(X) &= \sum_{i \in Actividades} (CN_{i} \times Y_{i} + CA_{i} \times Z_{i} + \text{...}  \\ 
+&CM_{i} \times DP)\\
+
+\textbf{s.a:} \\
+X_{i} - X_{j} &\geq T_{i} ~\forall ~(j,i) \in \text{Precedencias} \wedge ~j \prec ~i \\
+Y_{i} + Z_{i} &= 1 ~\forall ~i \in \text{Actividades} \\
+TN_{i} \times Y_{i} + TA_{i} \times Z_{i} &= T_{i} ~\forall ~i \in \text{Actividades} \\
+DP &= X_{i} ~\forall ~i \in \text{Actividades} \wedge ~i \in \{\text{''Fin''}\} \\
+
+\textbf{Donde:} \\
+\textbf{\(CN_{i}\)} &: \text{Costo Normal de la actividad \(i\).} \\
+\textbf{\(CA_{i}\)} &: \text{Costo Acelerado de la actividad \(i\).} \\
+\textbf{\(CM_{i}\)} &: \text{Costo Marginal de la actividad \(i\).} \\
+\textbf{\(TN_{i}\)} &: \text{Tiempo de Procesamiento Normal de la actividad \(i\).} \\
+\textbf{\(TA_{i}\)} &: \text{Tiempo de Procesamiento Acelerado de la actividad \(i\).} \\
+\\
+\textbf{\(Y_{i}\)} &: \text{Decisión binaria de ejecutar la actividad \(i\) en modalidad normal.} \\
+\textbf{\(Z_{i}\)} &: \text{Decisión binaria de ejecutar la actividad \(i\) en modalidad acelerada} \\
+\textbf{\(X_{i}\)} &: \text{Tiempo de terminación de la actividad \(i\).} \\
+\textbf{\(T_{i}\)} &: \text{Tiempo de procesamiento de la actividad \(i\).} \\
+\textbf{\(DP\)} &: \text{Duración del proyecto.} \\
+\\
+\textbf{\(R_{1}\)} &: \text{Garantiza que se respete el orden (precedencias) en la ejecución de actividades.} \\
+\textbf{\(R_{2}\)} &: \text{Busca que la selección de la modalidad de ejecución de cada actividad sea mutuamente excluyente.} \\
+\textbf{\(R_{3}\)} &: \text{Determina el tiempo de procesamiento de cada actividad a partir de la modalidad seleccionada.} \\
+\textbf{\(R_{4}\)} &: \text{Define que la duración del proyecto coincide con el tiempo de terminación de la actividad de apoyo "Fin".} \\
+\end{align*}
+:::
+
 
 # Módulo II - Gestión de la línea de producción
 ::: nonincremental
