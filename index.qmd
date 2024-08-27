@@ -12,7 +12,7 @@ format:
     scrollable: true
     controls: true
     margin: 0.14
-    self-contained: true
+    self-contained: false
     chalkboard: false
     theme: [simple, styles.scss]
     wrap: auto
