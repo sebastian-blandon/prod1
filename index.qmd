@@ -1273,6 +1273,21 @@ A_{j} &= \text{Available Time in machine j}
 :::
 :::
 
+### TOC - Example's answer
+::: columns
+::: small-text
+::: {.column width="50%"}
+![](0_Figures/1_TOC_Example_1_1.png)
+:::
+
+::: {.column width="50%"}
+Teniendo en cuenta el límite de 2,000 $\frac{min}{semana}$:
+
+![](0_Figures/1_TOC_Example_1_2.png)
+:::
+:::
+:::
+
 ### TOC - Example 2
 
 El departamento de ingeniería de ACME Company desea conocer cuáles son las máquinas o centros de trabajo que representan una restricción dentro de la línea de producción de electrodomésticos. Para ello, ha recoledato los siguientes datos:
