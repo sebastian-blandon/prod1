@@ -1594,14 +1594,15 @@ $$
 \begin{align*}
 \text{min } Z &= \sum_{j \in Estaciones} Y_{j} \\
 
-\textbf{s.t:} \\
+\textbf{s.t.} \\
 \sum_{i \in Tareas} t_{i} \times X_{i,j} &\leq C \times Y_{j} \qquad ~\forall ~j \in \text{Estaciones} \\
 \sum_{j \in Estaciones} X_{i,j} &= 1 \qquad ~\forall ~i \in \text{Tareas} \\
 \sum_{j \in Estaciones} j \times X_{k,j} &\leq \sum_{j \in Estaciones} j \times X_{i,j} \qquad ~\forall ~k \prec ~i \\
 Y_{j+1} &\leq Y_{j} \qquad ~\forall ~j \in \text{Estaciones} \\
 
 \textbf{Donde:} \\
-\textbf{\(X_{i,j}\)} &= \text{1 si la tarea \(i\) se realiza en la estación \(j\), 0 lo contrario.} \\
+\textbf{\(X_{i,j}\)} &= \text{1 si la tarea \(i\) se realiza en la estación \(j\),} \\
+&\text{0 lo contrario.} \\
 \textbf{\(Y_{j}\)} &= \text{1 si la estación \(j\) se abre, 0 lo contrario.} \\
 \textbf{\(t_{i}\)} &: \text{Tiempo de procesamiento de la tarea \(i\).} \\
 \textbf{\(C\)} &: \text{Tiempo de ciclo.} \\
@@ -1659,11 +1660,10 @@ $$
 \begin{align*}
 \text{min } Z &= C \\
 
-\textbf{s.t:} \\
+\textbf{s.t.} \\
 \sum_{j \in Estaciones} X_{i,j} &= 1  \qquad ~\forall ~i \in \text{Tareas} \\
 \sum_{i \in Tareas} t_{i} \times X_{i,j} &\leq C \qquad ~\forall ~j \in \text{Estaciones} \\
 \sum_{j \in Estaciones} j \times X_{k,j} &\leq \sum_{j \in Estaciones} j \times X_{i,j} \qquad ~\forall ~k \prec ~i \\
-Y_{j+1} &\leq Y_{j} \qquad ~\forall ~j \in \text{Estaciones} \\
 
 \textbf{Donde:} \\
 \textbf{\(X_{i,j}\)} &= \text{1 si la tarea \(i\) se realiza en la estación \(j\), 0 lo contrario.} \\
@@ -1700,16 +1700,17 @@ df %>%
 
 ::: small-text
 \begin{align*}
-\text{min } Z &= C \times \sum_{j \in Estaciones}^{} Y[j] \\
+\text{min } Z &= C \times \sum_{j \in Estaciones}^{} Y_{j} \\
 
-\textbf{s.t:} \\
+\textbf{s.t.} \\
 \sum_{i \in Tareas} t_{i} \times X_{i,j} &\leq C \times Y_{j} \qquad ~\forall ~j \in \text{Estaciones} \\
 \sum_{j \in Estaciones} X_{i,j} &= 1  \qquad ~\forall ~i \in \text{Tareas} \\
 \sum_{j \in Estaciones} j \times X_{k,j} &\leq \sum_{j \in Estaciones} j \times X_{i,j} \qquad ~\forall ~k \prec ~i \\
 Y_{j+1} &\leq Y_{j} \qquad ~\forall ~j \in \text{Estaciones} \\
 
 \textbf{Donde:} \\
-\textbf{\(X_{i,j}\)} &= \text{1 si la tarea \(i\) se realiza en la estación \(j\), 0 lo contrario.} \\
+\textbf{\(X_{i,j}\)} &= \text{1 si la tarea \(i\) se realiza en la estación \(j\),} \\
+&\text{0 lo contrario.} \\
 \textbf{\(Y_{j}\)} &= \text{1 si la estación \(j\) se abre, 0 lo contrario.} \\
 \textbf{\(t_{i}\)} &: \text{Tiempo de procesamiento de la tarea \(i\).} \\
 \textbf{\(C\)} &: \text{Tiempo de ciclo.} \\

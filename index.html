@@ -2648,7 +2648,7 @@ línea.</li>
 <p><span class="math display">\[\begin{align*}
 \text{min } Z &amp;= \sum_{j \in Estaciones} Y_{j} \\
 
-\textbf{s.t:} \\
+\textbf{s.t.} \\
 \sum_{i \in Tareas} t_{i} \times X_{i,j} &amp;\leq C \times Y_{j} \qquad
 ~\forall ~j \in \text{Estaciones} \\
 \sum_{j \in Estaciones} X_{i,j} &amp;= 1 \qquad ~\forall ~i \in
@@ -2659,7 +2659,8 @@ Y_{j+1} &amp;\leq Y_{j} \qquad ~\forall ~j \in \text{Estaciones} \\
 
 \textbf{Donde:} \\
 \textbf{\(X_{i,j}\)} &amp;= \text{1 si la tarea \(i\) se realiza en la
-estación \(j\), 0 lo contrario.} \\
+estación \(j\),} \\
+&amp;\text{0 lo contrario.} \\
 \textbf{\(Y_{j}\)} &amp;= \text{1 si la estación \(j\) se abre, 0 lo
 contrario.} \\
 \textbf{\(t_{i}\)} &amp;: \text{Tiempo de procesamiento de la tarea
@@ -2784,14 +2785,13 @@ línea.</li>
 <p><span class="math display">\[\begin{align*}
 \text{min } Z &amp;= C \\
 
-\textbf{s.t:} \\
+\textbf{s.t.} \\
 \sum_{j \in Estaciones} X_{i,j} &amp;= 1  \qquad ~\forall ~i \in
 \text{Tareas} \\
 \sum_{i \in Tareas} t_{i} \times X_{i,j} &amp;\leq C \qquad ~\forall ~j
 \in \text{Estaciones} \\
 \sum_{j \in Estaciones} j \times X_{k,j} &amp;\leq \sum_{j \in
 Estaciones} j \times X_{i,j} \qquad ~\forall ~k \prec ~i \\
-Y_{j+1} &amp;\leq Y_{j} \qquad ~\forall ~j \in \text{Estaciones} \\
 
 \textbf{Donde:} \\
 \textbf{\(X_{i,j}\)} &amp;= \text{1 si la tarea \(i\) se realiza en la
@@ -2867,9 +2867,9 @@ TIME [s]</th>
 <p><strong>Modelo exacto:</strong></p>
 <div class="small-text">
 <p><span class="math display">\[\begin{align*}
-\text{min } Z &amp;= C \times \sum_{j \in Estaciones}^{} Y[j] \\
+\text{min } Z &amp;= C \times \sum_{j \in Estaciones}^{} Y_{j} \\
 
-\textbf{s.t:} \\
+\textbf{s.t.} \\
 \sum_{i \in Tareas} t_{i} \times X_{i,j} &amp;\leq C \times Y_{j} \qquad
 ~\forall ~j \in \text{Estaciones} \\
 \sum_{j \in Estaciones} X_{i,j} &amp;= 1  \qquad ~\forall ~i \in
@@ -2880,7 +2880,8 @@ Y_{j+1} &amp;\leq Y_{j} \qquad ~\forall ~j \in \text{Estaciones} \\
 
 \textbf{Donde:} \\
 \textbf{\(X_{i,j}\)} &amp;= \text{1 si la tarea \(i\) se realiza en la
-estación \(j\), 0 lo contrario.} \\
+estación \(j\),} \\
+&amp;\text{0 lo contrario.} \\
 \textbf{\(Y_{j}\)} &amp;= \text{1 si la estación \(j\) se abre, 0 lo
 contrario.} \\
 \textbf{\(t_{i}\)} &amp;: \text{Tiempo de procesamiento de la tarea
