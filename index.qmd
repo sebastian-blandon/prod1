@@ -1434,28 +1434,401 @@ DP &= X_{i} ~\forall ~i \in \text{Actividades} \wedge ~i \in \{\text{''Fin''}\} 
 
 
 ## Production Engineering
+![](0_Figures/2_ProductionEngineering.png)
+
+## Production Engineering
+![](0_Figures/2_ProductionEngineering2.png)
 
 ## Sistemas de ensamble
+![](0_Figures/2_AssemblyLine.jpg)
 
 ### Clasificación
+![](0_Figures/2_AssemblySystems1.png)
 
 ### Tipos de problemas de ensamble
+![](0_Figures/2_AssemblyProblems.png)
+
+### Assembly Sequence Planning
+![](0_Figures/2_AssemblySequencePlanning.png)
+
+### Assembly Sequence Planning
+![](0_Figures/2_AssemblySequencePlanning2.png)
 
 ## Balanceo de líneas de ensamble
+### Assembly Balancing Problem
+Normalmente en una línea de ensamble, unas tareas o procesos toman más tiempo que otras, ocasionando en ciertos casos paradas de operadores y tiempos ociosos. Por otro lado, algunas operaciones más complejas o que necesitan más tiempo de procesamiento requieren más de un operador. El **balanceo de línea** busca optimizar el uso de los operadores con el fin de llegar al Takt Time previsto.
+
+Para efectuar un balanceo de línea es necesario conocer a fondo cada uno de los procesos y capacitar al personal para que ejecute con calidad varios procesos al interior de una línea de ensamble.
 
 ### Terminología
+- **Task:** es una unidad de trabajo indivisible $i$ que tiene asociado un tiempo de procesamiento $t_{i}$. El trabajo total requerido para ensamblar un producto se divide en un conjunto de $n$ tareas.
+
+- **Precedence relation:** están definidas por las restricciones sobre el orden en el cual las tareas $i$ pueden ser ejecutadas en el proceso de ensamble. De esta forma, una tarea no puede procesarse hasta que no se hayan procesado todas las que le preceden de forma inmediata. Los grafos se usan para representar las relaciones de precedencia.
+
+### Terminología
+- **Workstation:** es la parte $j$ del sistema de ensamble en donde se ejecutan las tareas $i$; pueden estar compuestas por un operador (humano o robot), cierto tipo de maquinaria y equipos o mecanismos de proceso especializados.
+
+- **Cycle time:** el tiempo de ciclo C es el tiempo disponible en cada estación $j$ para completar las tareas $i$ asignadas para una unidad de producto. Puede ser el tiempo máximo o el tiempo promedio disponible para cada ciclo de trabajo.
+
+### Terminología
+- **Workload:** es el conjunto de tareas $i$ asignadas a la estación $j$ denominado como $X_{i,j}$.
+
+- **Station Time:** es la suma de los tiemps de procesamiento $t_{i}$ de todas las tareas $i$ asignadas a una estación $j$ denominado como $S_{j}$.
+
+- **Idle Time:** es la diferencia entre el tiempo de ciclo $C$ y el tiempo de la estación $S_{j}$.
 
 ### Takt Time
+$$
+\begin{align*}
+\textbf{Takt Time} &= \frac{\text{Available Production Time}}{\text{Demanda per Time}}
+\\
+\end{align*}
+$$
+
+El $Takt Time$ es el ritmo de producción al que debería producirse la fábrica para cubrir la demanda sin demoras. Si bien es cierto este valor se puede tomar como referencia para el tiempo de ciclo, no son los mismo a pesar de tener las mismas unidades dimensionales.
+
+
+#### Simple Assembly Line Balancing Problem
+
+El **SALBP** presupone que todos los parámetros se conocen con certeza, así, una tarea no puede ser dividida entre dos o más estaciones de trabajo, existen secuencias tecnológicas que deben respetarse (que determinan relaciones de precedencia e incompatibilidad entre las tareas) y todas las tareas deben llevarse a cabo. También se presupone que todas las estaciones de trabajo están equipadas para poder realizar cualquier tarea y bajo el mismo costo. A la vez, la duración de realización de una tarea es independiente de la estación de trabajo a la que sea asignada y de las tareas que la hayan precedido en ella.
+
+#### General Assembly Line Balancing Problem
+
+Los **GALBP** engloban a todos aquellos problemas de balanceo de líneas de ensamble que no son SALBP. Los más comunes son los que tienen, por ejemplo: modelos mixtos, estaciones en paralelo, procesamientos alternativos, y tiempos de proceso variables; se caracterizan por dar cabida a problemas más reales y cotidianos que los SALBP. Se destacan cuatro tipos diferentes de problemas GALBP:
+
+
+## Balanceo de líneas de ensamble
+![](0_Figures/2_ALBP.png)
+
+
 
 ### SALBP
+- **SALBP-1:** se caracteriza por disponer de un tiempo de ciclo asignado (Takt Time) y desea minimizar el número de estaciones que se requiere para llevar a cabo el ensamble. Es muy común que se de cuando la demanda externa puede ser estimada y una nueva línea de ensamble vaya a ser instalada; asimismo, puede ser útil cuando se tiene la posibilidad de modificar libremente la distribución en planta.
+
+### SALBP
+- **SALBP-2:** a diferencia del caso anterior, se parte de un número de estaciones de ensamble fijo y se desea minimizar el tiempo de ciclo del sistema. Se acostumbra a presentar dicho problema cuando la línea de ensamble ya existe.
+
+
+### SALBP
+- **SALBP-E:** se busca maximizar la eficiencia de la línea de ensamble, o lo que es equivalente, se desea minimizar el producto del número de estaciones y el tiempo de ciclo.
+
+- **SALBP-F:** en este caso no se busca maximizar ni minimizar ningún valor, sino que se liminar a encontrar, si existe, una solución factible para una combinación cualquiera de tiempo de ciclo y número de estaciones.
+
+### SALBP
+**Métodos de solución:**
+
+- Heurísticas constructivas enfocadas en las estaciones.
+- Heurísticas constructivas enfocadas en las tareas.
+- Modelos exactos.
+
+### Heurísticas constructivas enfocadas en las estaciones
+
+Las heurísticas constructivas para solucionar el problema de balanceo de líneas de ensamble, se basan en establecer una regla de prioridad que permite elegir entre varias tareas candidatas a ser asignadas a una estación de trabajo. En caso de empate con la regla principal, se puede establecer reglas secundarias para desempatar.
+
+### SALBP
+**Heurísticas constructivas enfocadas en las estaciones**
+
+::: r-fit-text
+```{r}
+titulos <- c("Reglas", "Descripción")
+X1 <- c("Ranked Following Tasks", "Ranked Positional Weight", "Shortest Processing Time", "Longest Processing Time")
+X2 <- c("Se asigna primero la operación con mayor numero de tareas siguientes.", "Se asigna primero la operación con mayor tiempo posicional.", "De las tareas candidatas, se asigna la de menor tiempo de
+procesamiento.", "De las tareas candidatas, se asigna la de mayor tiempo de procesamiento.")
+
+
+df <- as_tibble(cbind(X1, X2))
+colnames(df) <- titulos
+df %>%
+    kbl(align = "c") %>%
+    kable_material(c("striped", "hover")) %>%
+    row_spec(1:nrow(df), extra_css = "text-align: center; vertical-align: middle;")
+```
+:::
+
+#### SALBP-1
+::: r-fit-text
+Realiza el cálculo de las estaciones de trabajo y asigna las tareas a cada estación, con el fin de obtener una línea de ensamble balanceada y que trabaje al Takt Time si la cantidad de productos a fabricar por semana son **$1,500 \frac{uni}{semana}$** . La empresa labora cinco días a la semana 8 horas al día, se da a los trabajadores un total de 30 minutos de descanso durante toda la jornada laboral. La información de las tareas se presenta en la siguiente tabla:
+
+
+```{r}
+titulos <- c("TASK", "PREDECESSOR TASK", "TASK TIME [s]")
+X1 <- c("A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K")
+X2 <- c("-", "A", "B", "-", "D", "C", "C", "E", "E", "F-G-H-I", "J")
+X3 <- c(15, 50, 60, 45, 30, 12, 65, 10, 8, 15, 5)
+
+
+df <- as_tibble(cbind(X1, X2, X3))
+colnames(df) <- titulos
+df %>%
+    kbl(align = "c") %>%
+    kable_material(c("striped", "hover")) %>%
+    row_spec(1:nrow(df), extra_css = "text-align: center; vertical-align: middle;")
+```
+:::
 
 #### SALBP-1
 
+**De forma manual...**
+
+1. Diagrama de red de tareas
+2. Sumar los $t_{i}$
+3. Calcular takt time
+4. Graficar estado actual contra takt time
+5. Calcular la cantidad de estaciones (redondeando siempre al valor entero superior más cercano):
+$$
+\begin{align*}
+\textbf{CE} &\geq \frac{\sum_{i \in Tareas}^{} t_{i}}{\text{Takt Time}}
+\\
+\end{align*}
+$$
+6. Asignar tareas con una heurística, siempre respetando la holgura y precedencias, calculando el Remaining Time, el tiempo de ciclo $S_{j}$ de cada estación y su idle time.
+7. Graficar la nueva distribución de tareas por estación contra el takt time.
+8. Calcular la capacidad y eficiencia de la línea.
+
+
+#### SALBP-1
+
+**Modelo exacto:** 
+
+::: small-text
+\begin{align*}
+\text{min } Z &= \sum_{j \in Estaciones} Y_{j} \\
+
+\textbf{s.t:} \\
+\sum_{i \in Tareas} t_{i} \times X_{i,j} &\leq C \times Y_{j} \qquad ~\forall ~j \in \text{Estaciones} \\
+\sum_{j \in Estaciones} X_{i,j} &= 1 \qquad ~\forall ~i \in \text{Tareas} \\
+\sum_{j \in Estaciones} j \times X_{k,j} &\leq \sum_{j \in Estaciones} j \times X_{i,j} \qquad ~\forall ~k \prec ~i \\
+Y_{j+1} &\leq Y_{j} \qquad ~\forall ~j \in \text{Estaciones} \\
+
+\textbf{Donde:} \\
+\textbf{\(X_{i,j}\)} &= \text{1 si la tarea \(i\) se realiza en la estación \(j\), 0 lo contrario.} \\
+\textbf{\(Y_{j}\)} &= \text{1 si la estación \(j\) se abre, 0 lo contrario.} \\
+\textbf{\(t_{i}\)} &: \text{Tiempo de procesamiento de la tarea \(i\).} \\
+\textbf{\(C\)} &: \text{Tiempo de ciclo.} \\
+\textbf{\(k\)} &: \text{Tarea que precede a la tarea \(i\).} \\
+
+\end{align*}
+:::
+
+
 #### SALBP-2
+::: r-fit-text
+Realiza la asignación de las tareas a cada estación, con el fin de obtener una línea de ensamble balanceada y el menor tiempo de ciclo posible. La empresa cuenta con una línea de ensamble la cual cuenta con **5 estaciones** de trabajo. La información de las tareas se presenta en la siguiente tabla:
+
+
+```{r}
+titulos <- c("TASK", "PREDECESSOR TASK", "TASK TIME [s]")
+X1 <- c("A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K")
+X2 <- c("-", "A", "B", "-", "D", "C", "C", "E", "E", "F-G-H-I", "J")
+X3 <- c(15, 50, 60, 45, 30, 12, 65, 10, 8, 15, 5)
+
+
+df <- as_tibble(cbind(X1, X2, X3))
+colnames(df) <- titulos
+df %>%
+    kbl(align = "c") %>%
+    kable_material(c("striped", "hover")) %>%
+    row_spec(1:nrow(df), extra_css = "text-align: center; vertical-align: middle;")
+```
+:::
+
+
+#### SALBP-2
+
+**De forma manual...**
+
+1. Diagrama de red de tareas
+2. Calcular el tiempo de ciclo (sin redondear)
+$$
+\begin{align*}
+\textbf{Cycle Time} &\geq \frac{\sum_{i \in Tareas}^{} t_{i}}{\text{Workstations quantity}}
+\\
+\end{align*}
+$$
+3. Graficar estado actual contra el cycle time ideal
+4. Asignar tareas con una heurística, siempre respetando la holgura y precedencias, calculando el Remaining Time, el tiempo de ciclo $S_{j}$ de cada estación y su idle time (no se permiten valores negativos).
+5. Graficar la nueva distribución de tareas por estación contra el tiempo de ciclo calculado.
+6. Calcular la capacidad y eficiencia de la línea.
+
+
+#### SALBP-2
+
+**Modelo exacto:** 
+
+::: small-text
+\begin{align*}
+\text{min } Z &= C \\
+
+\textbf{s.t:} \\
+\sum_{j \in Estaciones} X_{i,j} &= 1  \qquad ~\forall ~i \in \text{Tareas} \\
+\sum_{i \in Tareas} t_{i} \times X_{i,j} &\leq C \qquad ~\forall ~j \in \text{Estaciones} \\
+\sum_{j \in Estaciones} j \times X_{k,j} &\leq \sum_{j \in Estaciones} j \times X_{i,j} \qquad ~\forall ~k \prec ~i \\
+Y_{j+1} &\leq Y_{j} \qquad ~\forall ~j \in \text{Estaciones} \\
+
+\textbf{Donde:} \\
+\textbf{\(X_{i,j}\)} &= \text{1 si la tarea \(i\) se realiza en la estación \(j\), 0 lo contrario.} \\
+\textbf{\(t_{i}\)} &: \text{Tiempo de procesamiento de la tarea \(i\).} \\
+\textbf{\(C\)} &: \text{Tiempo de ciclo.} \\
+\textbf{\(k\)} &: \text{Tarea que precede a la tarea \(i\).} \\
+
+\end{align*}
+:::
+
+#### SALBP-E
+::: r-fit-text
+Realiza la asignación de las tareas a cada estación, con el fin de obtener una línea de ensamble balanceada que represente el mejor índice de eficiencia. La empresa ha estipulado que el tiempo de ciclo de una estación no puede superar los 100s. La información de las tareas se presenta en la siguiente tabla:
+
+```{r}
+titulos <- c("TASK", "PREDECESSOR TASK", "TASK TIME [s]")
+X1 <- c(seq(1,6,by=1))
+X2 <- c("-", "1", "-", "2", "2", "3-4-5")
+X3 <- c(20,15,40,5,30,20)
+
+
+df <- as_tibble(cbind(X1, X2, X3))
+colnames(df) <- titulos
+df %>%
+    kbl(align = "c") %>%
+    kable_material(c("striped", "hover")) %>%
+    row_spec(1:nrow(df), extra_css = "text-align: center; vertical-align: middle;")
+```
+:::
 
 #### SALBP-E
 
-### MOALBP
+**Modelo exacto:** 
+
+::: small-text
+\begin{align*}
+\text{min } Z &= C \times \sum_{j \in Estaciones}^{} Y[j] \\
+
+\textbf{s.t:} \\
+\sum_{i \in Tareas} t_{i} \times X_{i,j} &\leq C \times Y_{j} \qquad ~\forall ~j \in \text{Estaciones} \\
+\sum_{j \in Estaciones} X_{i,j} &= 1  \qquad ~\forall ~i \in \text{Tareas} \\
+\sum_{j \in Estaciones} j \times X_{k,j} &\leq \sum_{j \in Estaciones} j \times X_{i,j} \qquad ~\forall ~k \prec ~i \\
+Y_{j+1} &\leq Y_{j} \qquad ~\forall ~j \in \text{Estaciones} \\
+
+\textbf{Donde:} \\
+\textbf{\(X_{i,j}\)} &= \text{1 si la tarea \(i\) se realiza en la estación \(j\), 0 lo contrario.} \\
+\textbf{\(Y_{j}\)} &= \text{1 si la estación \(j\) se abre, 0 lo contrario.} \\
+\textbf{\(t_{i}\)} &: \text{Tiempo de procesamiento de la tarea \(i\).} \\
+\textbf{\(C\)} &: \text{Tiempo de ciclo.} \\
+\textbf{\(k\)} &: \text{Tarea que precede a la tarea \(i\).} \\
+
+\end{align*}
+:::
+
+### WPALBP
+::: r-fit-text
+Realiza la asignación de las tareas a cada estación, con el fin de obtener una línea de ensamble balanceada. La cantidad de productos a fabricar es de $1,350 uni$ por día, la empresa labora 8 horas al día, se da a los trabajadores un total de 30 minutos de descanso durante toda la jornada laboral. Por restricciones de espacio, no se permite más de dos operarios por estación. La información de tareas se presenta en la siguiente tabla:
+
+```{r}
+titulos <- c("TASK", "PREDECESSOR TASK", "TASK TIME [s]")
+X1 <- c(seq(1,6,by=1))
+X2 <- c("-", "1", "-", "2", "2", "3-4-5")
+X3 <- c(20,15,40,5,30,20)
+
+
+df <- as_tibble(cbind(X1, X2, X3))
+colnames(df) <- titulos
+df %>%
+    kbl(align = "c") %>%
+    kable_material(c("striped", "hover")) %>%
+    row_spec(1:nrow(df), extra_css = "text-align: center; vertical-align: middle;")
+```
+:::
+
+### WorkStation Parallel Assembly Line Balancing (WPALBP)
+
+Cuando el **Takt Time** es menor que muchos de los tiempos estándar de las tareas, lo cual implica la necesidad de tener más de un operario en las estaciones de trabajo denominado como $W_{j}$ (cantidad de operarios en la estación $j$), los cuales trabajarán en las operaciones de forma simultánea.
+
+En este proceso se busca variar la fuerza de trabajo en cada estación de tal forma que se afecte la capacidad de producción disminuyendo el tiempo de ciclo de las operaciones a realizarse en cada estación hasta lograr alcanzar el **Takt Time** deseado.
+
+#### WPALBP
+
+**Modelo exacto:** 
+
+::: small-text
+\begin{align*}
+\text{min } Z &= \sum_{j \in Estaciones}^{} Y_{j} + W_{j}\\
+
+\textbf{s.t.} \\
+\sum_{j \in Estaciones} X_{i,j} &= 1 \qquad ~\forall ~i \in \text{Tareas} \\
+\sum_{i \in Tareas} t_{i} \times X_{i,j} &\leq C \times Y_{j} \times W_{j} \qquad ~\forall ~j \in \text{Estaciones} \\
+\sum_{j \in Estaciones} j \times X_{k,j} &\leq \sum_{j \in Estaciones} j \times X_{i,j} \qquad ~\forall ~k \prec ~i \\
+Y_{j+1} &\leq Y_{j} \qquad ~\forall ~j \in \text{Estaciones}\\ 
+W_{j} &\leq \text{W_max}_{j} \qquad ~\forall ~j \in \text{Estaciones} \\
+
+\textbf{Donde:} \\
+\textbf{\(X_{i,j}\)} &= \text{1 si la tarea \(i\) se realiza en la estación \(j\),} \\
+&\text{0 lo contrario.} \\
+\textbf{\(Y_{j}\)} &= \text{1 si la estación \(j\) se abre, 0 lo contrario.} \\
+\textbf{\(\text{W_max}_{j}\)} &: \text{Cantidad máxima de operarios que pueden} \\
+&\text{ser asignados a la estación \(j\).} \\
+\textbf{\(t_{i}\)} &: \text{Tiempo de procesamiento de la tarea \(i\).} \\
+\textbf{\(C\)} &: \text{Tiempo de ciclo.} \\
+\textbf{\(k\)} &: \text{Tarea que precede a la tarea \(i\).}\\
+
+\end{align*}
+:::
+
+### MALBP
+![](0_Figures/2_MALBP.png)
+
+### Mixed-Product Assembly Line Balancing (MALBP)
+Las líneas de ensamble tradicionalmente han sido utilizadas para producir grandes cantidades de un único modelo. Para aprovechar las ventajas de estas en ambientes de manufactura flexibles, se pueden implementar líneas de modelos mixtos las cuales permiten ensamblar diferentes productos de una familia en una misma línea; sin embargo, su balanceo requiere técnicas diferentes de las tradicionales.
+
+### MALBP
+El concepto de modelos mixtos hace referencia a una familia que se compone por un conjunto de productos que se diferencian entre sí solamente por características menores, pero cuyas funciones principales son básicamente las mismas. Generalmente estos productos se ensamblan después de que el cliente defina sus requerimientos personales, y a pesar de que son diferentes, se desea que el proceso productivo sea similar para todos ellos; por lo tanto, es razonable pensar que cualquier combinación de estos se puede ensamblar en una misma línea, siempre y cuando los tiempos de alistamiento al pasar de un modelo a otro sean despreciables.
+
+### MALBP
+Este método consiste en simplificar el problema de modelos mixtos y abordarlo como si se tratara de una línea de modelo único SALBP; para esto se hace una transformación sencilla de los datos, que consiste en calcular el tiempo promedio $T_{k}$ de cada tarea $k$ . Una forma para calcular este promedio es la siguiente ecuación:
+
+::: small-text
+::: columns
+::: {.column width=40%}
+$$
+\begin{align*}
+T_{k} = \sum_{j \in Modelos} C_{k,j} \times d_{j}
+\end{align*}
+$$
+:::
+
+::: {.column width=60%}
+$$
+\begin{align*}
+\textbf{Donde:} \\
+d_{j} &: \text{es la participación del modelo j} \\
+&\text{en el mix de la demanda.} \\
+C_{k,j} &: \text{es la duración de la tarea k para} \\
+&\text{el modelo j.} \\
+\end{align*}
+$$
+:::
+:::
+:::
+
+### MALBP
+
+**Ejercicio:**
+
+Realiza la asignación de las tareas a cada estación, con el fin de obtener una línea de ensamble balanceada capaz de ensamblar los tres productos requeridos. La demanda de los productos es de $1200$ , $600$ y $200$ unidades respectivamente. El departamento de producción estima que el tiempo disponible para fabricación es de 500 minutos. La información de las tareas se presenta en la imagen.
+
+### MALBP
+![](0_Figures/2_MALBP2.png)
+
+### MALBP
+
+1. Plantear el diagrama de red de tareas de cada modelo.
+2. Plantear el diagrama compuesto de red de tareas.
+3. Calcular los pesos de cada referencia del producto.
+4. Calcular el takt time.
+5. Calcular el tiempo promedio ponderado de cada tarea.
+6. Calcular la cantidad de estaciones usando la suma de los tiempos y el takt time.
+7. Balancear la línea aplicando SALBP.
+
+### MALBP
+![](0_Figures/2_MALBP3.png)
 
 ### UALBP
 
